@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Abhi ❤ Kawaii</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{
+  margin:0;
+  height:100vh;
+  background:linear-gradient(135deg,#ff9a9e,#fad0c4);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-family:"Segoe UI",sans-serif;
+  overflow:hidden;
+}
+
+/* INTRO */
+.intro{
+  position:fixed;
+  inset:0;
+  background:#ff5f9e;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  color:white;
+  font-size:32px;
+  font-weight:bold;
+  z-index:10;
+  animation:fadeOut 2.5s forwards;
+}
+@keyframes fadeOut{
+  0%{opacity:1}
+  70%{opacity:1}
+  100%{opacity:0;visibility:hidden}
+}
+
+/* CARD */
+.card{
+  background:rgba(255,255,255,0.96);
+  padding:30px;
+  border-radius:30px;
+  max-width:420px;
+  text-align:center;
+  box-shadow:0 20px 45px rgba(0,0,0,.25);
+  opacity:0;
+  transform:translateY(40px) scale(.9);
+  animation:cardIn 1.2s ease forwards, beat 1.5s infinite;
+  animation-delay:2.2s,3.4s;
+}
+@keyframes cardIn{to{opacity:1;transform:none}}
+@keyframes beat{
+  0%,100%{box-shadow:0 0 15px #ff8fb1}
+  50%{box-shadow:0 0 35px #ff2f68}
+}
+
+.top{
+  font-size:28px;
+  font-weight:bold;
+  color:#ff1e63;
+  margin-bottom:10px;
+}
+h1{color:#ff2f68}
+.msg{
+  font-size:17px;
+  line-height:1.7;
+  color:#333;
+}
+.tap{
+  margin-top:18px;
+  padding:12px;
+  background:#ffedf4;
+  border-radius:18px;
+  cursor:pointer;
+  font-weight:bold;
+  color:#ff2f68;
+}
+.hidden{
+  display:none;
+  margin-top:15px;
+  font-size:22px;
+  font-weight:bold;
+  color:#ff004f;
+}
+
+/* HEARTS */
+.heart{
+  position:absolute;
+  font-size:18px;
+  color:#ff2f68;
+  animation:float 6s linear infinite;
+}
+@keyframes float{
+  0%{transform:translateY(100vh);opacity:0}
+  10%{opacity:1}
+  100%{transform:translateY(-10vh);opacity:0}
+}
+</style>
+</head>
+
+<body onclick="startMusic()">
+
+<div class="intro">Abhi ❤ Kawaii</div>
+
+<div class="card">
+  <div class="top">Abhi ❤ Kawaii</div>
+  <h1>Happy New Year 💕</h1>
+
+  <div class="msg">
+    I knew you’d open this… because somewhere, you were already thinking of me 😏<br><br>
+    New year 🍂, same you — but my love for you grows deeper with every sunrise 😌✨  
+    If loving you is my resolution 😚, then trust me… I’m never quitting 😜<br><br>
+    365 new chances 😇, one forever choice — <b>you</b> 😁  
+    Let’s write another beautiful chapter together 🤗  
+    And if this year gives me nothing but you 😆, I’ll still call it perfect 😉<br><br>
+    <b>Happy New Year, my Kawaii 💕🎐</b><br>
+    Your eyes 👀 are way too dangerous —  
+    they make me fall in love every single time 😘💖
+  </div>
+
+  <div class="tap" onclick="reveal()">
+    Tap here… I hid something for you 😳👇
+  </div>
+
+  <div id="final" class="hidden">
+    i love you for infinity ♾️ (1438) kawaii
+  </div>
+</div>
+
+<!-- MUSIC -->
+<audio id="bgm" loop>
+  <source src="lovebug.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+let started=false;
+const bgm=document.getElementById("bgm");
+
+/* Start soft music */
+function startMusic(){
+  if(!started){
+    bgm.volume=0.2;   // smooth reading volume
+    bgm.play();
+    started=true;
+  }
+}
+
+/* Smooth volume increase */
+function fadeVolume(target){
+  let step=(target-bgm.volume)/30;
+  let interval=setInterval(()=>{
+    bgm.volume+=step;
+    if(Math.abs(bgm.volume-target)<0.02){
+      bgm.volume=target;
+      clearInterval(interval);
+    }
+  },100);
+}
+
+/* Reveal moment */
+function reveal(){
+  document.getElementById("final").style.display="block";
+  fadeVolume(0.8); // beat up on reveal ❤️‍🔥
+}
+
+/* Floating hearts */
+setInterval(()=>{
+  let h=document.createElement("div");
+  h.className="heart";
+  h.innerHTML="❤️";
+  h.style.left=Math.random()*100+"vw";
+  document.body.appendChild(h);
+  setTimeout(()=>h.remove(),7000);
+},300);
+</script>
+
+</body>
+  </html>
